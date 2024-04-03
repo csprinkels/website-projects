@@ -74,21 +74,21 @@ function noiseMap(size = 256, intensity = 60, repeat = 0) {
 
 let carGeometry = new THREE.BoxGeometry(20, 10, 3);
 let carMaterial = new THREE.MeshPhongMaterial({
-  color: 0xB74242,
-  //specular: 0x009900,
-  //bumpMap: noiseMap(128, 20, 5),
+  color: 0x0E4BEF,
+  specular: 0xFFFFFF,
+  bumpMap: noiseMap(128, 20, 5),
   shininess: 100,
-  emissive: 0xFF0000,
+  emissive: 0x0046ff,
   emissiveIntensity: 0.6 });
 
 
 let carTopGeometry = new THREE.BoxGeometry(12, 8, 5);
 let carTopMaterial = new THREE.MeshPhongMaterial({
-  color: 0xB74242,
-  //specular: 0x009900,
-  //bumpMap: noiseMap(128, 20, 5),
+  color: 0x0E4BEF,
+  specular: 0xFFFFFF,
+  bumpMap: noiseMap(128, 20, 5),
   shininess: 100,
-  emissive: 0x990000,
+  emissive: 0x00278f,
   emissiveIntensity: 0.7 });
 
 
@@ -177,9 +177,6 @@ function Car(color) {
 
     return light;
   });
-
-  //this.rotation.x = Math.PI / 2;
-
 }
 
 Car.prototype = Object.assign(THREE.Object3D.prototype, {
