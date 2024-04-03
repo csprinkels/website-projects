@@ -32,12 +32,7 @@ document.body.appendChild(renderer.domElement);
 
 /*////////////////////////////////////////*/
 
-
-// var ambientLight = new THREE.AmbientLight(0x222222);
-// scene.add(ambientLight);
-
 let hemiLight = new THREE.HemisphereLight(0xEBF7FD, 0xEBF7FD, 0.2);
-//hemiLight.color.setRGB(0.75,0.8,0.95);
 hemiLight.position.set(0, 20, 20);
 scene.add(hemiLight);
 
@@ -156,7 +151,7 @@ function Car(color) {
 
     light = new THREE.SpotLight(0xffffff);
     light.position.x = 11;
-    light.position.y = i < 1 ? -3 : 3; //;
+    light.position.y = i < 1 ? -3 : 3;
     light.position.z = -3;
     light.angle = Math.PI / 3.5;
 
@@ -170,7 +165,7 @@ function Car(color) {
     light.shadow.camera.fov = 40;
 
     light.target.position.y = i < 1 ? -0.5 : 0.5;
-    light.target.position.x = 35; // = Math.PI/2;
+    light.target.position.x = 35;
 
     this.add(light.target);
     this.add(light);
@@ -189,7 +184,7 @@ Car.prototype = Object.assign(THREE.Object3D.prototype, {
   steering: 0,
   lightsOn: true,
 
-  // Driving controls adapted from https://codepen.io/Beclamide/pen/bNyxVz?editors=0010
+
   update() {
 
     var prev = {
@@ -198,7 +193,7 @@ Car.prototype = Object.assign(THREE.Object3D.prototype, {
       rot: this.rotation.z };
 
 
-    var steerPower = 0.0006; // / (this.speed + 1);
+    var steerPower = 0.0006;
 
     // steering
     if (keys[39] || keys[68]) {
@@ -226,7 +221,6 @@ Car.prototype = Object.assign(THREE.Object3D.prototype, {
     if (this.wheels) {
       this.wheels.forEach((wheel, i) => {
         wheel.rotation.y += 0.1 * this.speed;
-        //wheel.rotation.x = Math.sin(this.angle);// * 0.2;
       });
     }
 
@@ -265,15 +259,15 @@ Car.prototype = Object.assign(THREE.Object3D.prototype, {
     this.position.x = this.position.x > 990 || this.position.x < -990 ? prev.x : this.position.x;
     this.position.y = this.position.y > 990 || this.position.y < -990 ? prev.y : this.position.y;
 
-    camera.position.x += (this.position.x - camera.position.x) * 0.1; //0.02; // (camera.position.x - this.position.x)/50;
-    camera.position.y = this.position.y - 40 - this.speed * 10; //(( this.position.y -camera.position.y ) * 0.01 ) +; //0.02; //(camera.position.y - thiposition.y)/50;
+    camera.position.x += (this.position.x - camera.position.x) * 0.1;
+    camera.position.y = this.position.y - 40 - this.speed * 10;
 
 
     camera.lookAt(
     new THREE.Vector3(
-    this.position.x, // + (xdir * 4), 
-    this.position.y, // - (ydir * 4), 
-    0 //Math.sin( (this.speed / this.maxspeed) * Math.PI*2 )+1/2 * 80)
+    this.position.x,
+    this.position.y,
+    0 
     ));
 
   } });
@@ -299,8 +293,6 @@ renderCalls.push(car.update.bind(car));
 
 /*////////////////////////////////////////*/
 
-
-
 let noise = noiseMap(256, 20, 30);
 function snowyGround() {
 
@@ -323,13 +315,10 @@ function snowyGround() {
     bumpMap: noise,
 
     bumpScale: 0.15,
-    //emissive: 0xEBF7FD,
-    //emissiveIntensity: 0.05,
     shading: THREE.SmoothShading });
 
 
   let plane = new THREE.Mesh(geometry, material);
-  //plane.rotation.x = Math.PI / -2;
   plane.receiveShadow = true;
   plane.position.z = -5;
 
